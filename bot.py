@@ -7,7 +7,7 @@ print(api_key)
 bot = telebot.TeleBot(api_key)
 
 b2t = {
-  "hotlines": "☎️Горячие Линии☎️",
+  "hotlines": "☎️Оперативные службы в Казахстане☎️",
   "government": "Государственная служба",
   "assist": "Гумманитарная помощь" 
 }
@@ -27,23 +27,41 @@ def bot_message(message):
   if message.chat.type == 'private':
 
     if message.text == b2t["hotlines"]:
-      with open("replies/hotlines.txt") as f:
+      with open("replies/hotlines.txt", encoding="utf-8") as f:
         reply = f.read()
       bot.send_message(message.chat.id, reply, parse_mode="html")
 
-    elif message.text == '2':
+    elif message.text == b2t["government"]:
 
       markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
-      item1 = types.KeyboardButton('1')
-      item2 = types.KeyboardButton('2')
-      item3 = types.KeyboardButton('3')
-      item4 = types.KeyboardButton('4')
+      item1 = types.KeyboardButton('Банк')
+      item2 = types.KeyboardButton('ЦОН')
+      item3 = types.KeyboardButton('Посольство')
       back = types.KeyboardButton('назад')
-      markup.add(item1, item2, item3, item4, back)
-      start_message = f"<b>Hello</b>, <i>{message.from_user.first_name}</i>"
-    
+      markup.add(item1, item2, item3, back)
+
       bot.send_message(message.chat.id, start_message, reply_markup = markup, parse_mode="html")
 
+      if message.text ==('Банк'):
+        with open("replies/Bank.txt", encoding="utf-8") as f:
+          reply = f.read()
+        bot.send_message(message.chat.id, reply, parse_mode="html")
+
+      elif message.text == ('ЦОН'):
+        with open("replies/PSC.txt", encoding="utf-8") as f:
+         reply = f.read()
+        bot.send_message(message.chat.id, reply, parse_mode="html")
+
+      elif message.text == ('Посольство'):
+        with open("replies/embassy.txt", encoding="utf-8") as f:
+         reply = f.read()
+        bot.send_message(message.chat.id, reply, parse_mode="html")
+    
+      elif message.text == b2t["assist"]:
+        with open("replies/funds.txt", encoding="utf-8") as f:
+         reply = f.read()
+      bot.send_message(message.chat.id, reply, parse_mode="html")
+    
     elif message.text == '3':
       markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
       item1 = types.KeyboardButton('1')
