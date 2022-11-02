@@ -7,7 +7,6 @@ from telebot import types
 responses = json.load(open("responses.json", encoding="utf-8"))
 buttons = json.load(open("buttons.json", encoding="utf-8"))
 api_key = os.getenv('TELEGRAM_API')
-api_key = "5435243295:AAEDsQRyUsBg8Cmyii0NfR5j4RJJXUJ_wv8"
 bot = telebot.TeleBot(api_key)
 
 conn = sqlite3.connect('db/database.db', check_same_thread=False)
@@ -57,7 +56,6 @@ def callback_handle(call):
 
 @bot.message_handler(commands=['start'])
 def start(message):
-<<<<<<< HEAD
 	set_language(message)
 
 @bot.message_handler(content_types=['text'])
@@ -97,9 +95,8 @@ def bot_message(message):
 			bot.send_message(message.chat.id, reply, parse_mode="html")
 		elif message.text == buttons["assist"][lang]:
 			reply = responses["assist"][lang]
-			bot.send_message(message.chat.id, reply, parse_mode="html")
-=======
-  markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+			bot.send_message(message.chat.id, reply, parse_mode="html"
+				  markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
   item1 = types.KeyboardButton("ua")
   item2 = types.KeyboardButton("ru")
   markup.add(item1, item2)
@@ -161,6 +158,5 @@ def bot_message(message):
     elif message.text == buttons["assist"]["ua"]:
       reply = responses["assist"]["ua"]
       bot.send_message(message.chat.id, reply, parse_mode="html")
->>>>>>> aa9a72eeb3176abe25119099362b5910b49b2741
 
 bot.polling(non_stop=True,)
