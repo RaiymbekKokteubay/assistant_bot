@@ -18,6 +18,7 @@ def start_menu(message, lang):
 		types.KeyboardButton(buttons["hotlines"][lang]),
 		types.KeyboardButton(buttons["government"][lang]),
 		types.KeyboardButton(buttons["assist"][lang]),
+		types.KeyboardButton(buttons["hot_lines"][lang]),
 		types.KeyboardButton(buttons["change_lang"][lang])
 	)
 	bot.send_message(
@@ -71,11 +72,15 @@ def bot_message(message):
 		elif message.text == buttons["hotlines"][lang]:
 			reply = responses["hotlines"][lang]
 			bot.send_message(message.chat.id, reply, parse_mode="html")
+		elif message.text == buttons["hot_lines"][lang]:
+			reply = responses["hot_lines"][lang]
+			bot.send_message(message.chat.id, reply, parse_mode="html")
 		elif message.text == buttons["government"][lang]:
 			markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 			markup.add(
 				types.KeyboardButton(buttons["bank"][lang]),
 				types.KeyboardButton(buttons["embassy"][lang]),
+				types.KeyboardButton(buttons["psc"][lang]),
 				types.KeyboardButton(buttons["back"][lang]),
 			)
 			bot.send_message(
